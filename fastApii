@@ -1,0 +1,264 @@
+
+
+---
+
+# Learning Roadmap
+
+## 1. Prerequisites
+
+Before studying FastAPI, make sure you understand:
+
+* Python basics
+* HTTP fundamentals
+* REST API concepts
+* Virtual environments
+
+Useful resources:
+
+* https://developer.mozilla.org/en-US/docs/Web/HTTP
+* https://realpython.com/
+
+---
+
+# Step 1: Install FastAPI
+
+```bash
+pip install fastapi uvicorn
+```
+
+Run the server:
+
+```bash
+uvicorn main:app --reload
+```
+
+---
+
+# Step 2: Your First API
+
+Create a file:
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def home():
+    return {"message": "Hello FastAPI"}
+```
+
+Run:
+
+```
+http://127.0.0.1:8000
+```
+
+API Docs:
+
+```
+http://127.0.0.1:8000/docs
+```
+
+---
+
+# Step 3: Path Operations
+
+Learn the basic HTTP methods:
+
+```python
+@app.get()
+@app.post()
+@app.put()
+@app.delete()
+```
+
+Example:
+
+```python
+@app.get("/users")
+def get_users():
+    return {"users": []}
+```
+
+---
+
+# Step 4: Request Body with Pydantic
+
+FastAPI uses Pydantic for data validation.
+
+```python
+from pydantic import BaseModel
+
+class User(BaseModel):
+    name: str
+    age: int
+
+@app.post("/users")
+def create_user(user: User):
+    return user
+```
+
+---
+
+# Step 5: Query Parameters
+
+Example:
+
+```python
+@app.get("/items")
+def get_items(limit: int = 10):
+    return {"limit": limit}
+```
+
+---
+
+# Step 6: Dependency Injection
+
+Used for:
+
+* Authentication
+* Database connections
+* Shared logic
+
+Example:
+
+```python
+from fastapi import Depends
+
+def common_parameters():
+    return {"skip": 0, "limit": 10}
+
+@app.get("/items")
+def read_items(params: dict = Depends(common_parameters)):
+    return params
+```
+
+---
+
+# Step 7: Async Programming
+
+FastAPI supports asynchronous functions.
+
+```python
+@app.get("/async")
+async def async_example():
+    return {"message": "async endpoint"}
+```
+
+Learn asyncio:
+https://docs.python.org/3/library/asyncio.html
+
+---
+
+# Step 8: Authentication (JWT)
+
+Important for real applications.
+
+Topics to learn:
+
+* JWT tokens
+* OAuth2
+* Password hashing
+
+Resource:
+https://fastapi.tiangolo.com/tutorial/security/
+
+---
+
+# Step 9: Database Integration
+
+Popular options:
+
+* PostgreSQL
+* MySQL
+* SQLite
+
+ORMs commonly used:
+
+* SQLAlchemy
+* Prisma
+
+---
+
+# Step 10: Production Deployment
+
+Learn how to deploy using:
+
+* Docker
+* Nginx
+* Cloud platforms
+
+Useful resources:
+
+* https://docs.docker.com/
+* https://nginx.org/en/docs/
+
+---
+
+# Suggested Practice Projects
+
+## Project 1
+
+Simple CRUD API
+
+Features:
+
+* Create users
+* Update users
+* Delete users
+* List users
+
+---
+
+## Project 2
+
+Authentication API
+
+Features:
+
+* Register
+* Login
+* JWT authentication
+
+---
+
+## Project 3
+
+Data Pipeline API
+
+Features:
+
+* Receive data
+* Store in database
+* Send to streaming system
+
+---
+
+# Recommended Tools
+
+* Postman
+* Docker
+* Git
+* VS Code
+
+---
+
+# Final Advice
+
+Do not only read documentation.
+
+The best way to learn FastAPI:
+
+1. Build APIs
+2. Connect them with databases
+3. Deploy them
+
+Practice is the key.
+
+---
+
+# Author
+
+FastAPI Learning Notes
+Backend / Data Engineering Path
